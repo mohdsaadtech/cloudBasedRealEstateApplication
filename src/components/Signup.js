@@ -22,7 +22,7 @@ const Signup = ({
     setSuccessMessage("");
     setFailureMessage("");
     try {
-      let res = await fetch("http://localhost:5000/users/addUser", {
+      let res = await fetch("http://localhost:5000/addUser", {
         method: "POST",
         headers: {"Accept":"application/x-www-form-urlencoded", 'Content-Type': 'application/json'},
         body: JSON.stringify({
