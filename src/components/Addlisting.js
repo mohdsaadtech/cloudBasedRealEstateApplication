@@ -9,6 +9,7 @@ function Addlisting() {
   const{register, formState:{errors}, handleSubmit,}= useForm();
   const onSubmit =(data)=>console.log(data);
   async function submit(){
+    //for right now hard code the value of userid 64724d60aed0dca72ee0347d and hardcode image url http://localhost:5000/images/house12lg.png
     let item={Title,Address,Description};
    let result = await fetch("http://localhost:5000/users/addUser",{
     method:'POST',
