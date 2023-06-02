@@ -10,7 +10,7 @@ import PropertyDetails from './pages/PropertyDetails';
 import HouseList from './components/House';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Addlisting from './components/CSS/Addlisting';
+import Addlisting from './components/Addlisting';
 import Sidebar from './components/Sidebar';
 import About from './components/About';
 import Contact from './components/ContactComponent/Contact';
