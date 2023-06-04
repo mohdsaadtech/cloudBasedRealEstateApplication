@@ -13,7 +13,7 @@ function Addlisting() {
    const[bedroom_count,setBedroom_count]=useState("");
    const[bathroom_count,setBathroom_count]=useState("");
    const[user_id,setUser_id]=useState("64724d60aed0dca72ee0347d");
-   const[imageUrl ,setImageUrl]=useState("http://localhost:5000/images/house12lg.png");
+   const[imageUrl ,setImageUrl]=useState("");
 
    const [successMessage, setSuccessMessage] = useState("");
    const [failureMessage, setFailureMessage] = useState("");
@@ -77,7 +77,7 @@ function Addlisting() {
     <div className=' flex justify-center items-center w-full  bg-violet-600'>
   
     
-  <form  className="max-w-[800px] w-full mx-auto bg-violet-50 p-8 h-[vh-400] scrollbar scrollbar-thumb-red-500" onSubmit={handleSubmit} >
+  <form  className="max-w-[800px] w-full mx-auto bg-violet-50 p-8 h-[vh-400] scrollbar scrollbar-thumb-red-500" onSubmit={handleSubmit} encType='multipart/form-data'>
   {successMessage ? <div className='text-center'><p className="text-green-800 font-semibold text-2xl">{successMessage}</p></div> : null}
       {failureMessage ? <div className='text-center'><p className="text-red-800 font-semibold text-2xl">{failureMessage}</p></div> : null}
     <h2 className='text-4xl font-bold text-center py-8'><span className='text-violet-800 font-semibold'>Add</span>listings.</h2>
@@ -145,6 +145,11 @@ function Addlisting() {
          <label  className='font-semibold'>Description</label>
          <textarea className='border border-gray-300 focus:border-violet-700 rounded w-full p-4 h-36 text-sm text-gray-400 outline-none resize-none' type="text" placeholder="Description" onChange={(e)=>setDescription(e.target.value)}/>
     
+       </div>
+       <div className='grid mr-1'>
+         <label  className='font-semibold image-upload'>Select listing image</label>
+         <input className='border relative bg-white p-2' type="file" accept=".png, .jpg, .jpeg" name="image_url"
+       onChange={(e)=>setImageUrl(e.target.files[0])}/>
        </div>
        <button type="submit" className='btn btn-primary w-full mt-8 py-3 bg-violet-800 hover:bg-violet-600 relative text-white'>submit</button>
     </form>
