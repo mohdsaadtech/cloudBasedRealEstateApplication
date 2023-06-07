@@ -60,6 +60,8 @@ function Addlisting() {
         setType("");
         setBedroom_count("");
         setBathroom_count("");
+        setDescription("");
+        setUser_id("");
         //setUser_id("64724d60aed0dca72ee0347d ");
         setSuccessMessage("Listing created successfully");
       } else {
