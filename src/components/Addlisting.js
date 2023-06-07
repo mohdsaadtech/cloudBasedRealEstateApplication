@@ -54,6 +54,7 @@ function Addlisting() {
       if (result.status === 201) {
         setTitle("");
         setAddress("");
+        setDescription("");
         setArea_name("");
         setRent("");
         setArea("");
@@ -61,6 +62,7 @@ function Addlisting() {
         setBedroom_count("");
         setBathroom_count("");
         //setUser_id("64724d60aed0dca72ee0347d ");
+        setImageUrl(null);
         setSuccessMessage("Listing created successfully");
       } else {
         setFailureMessage(resultJson.message);
