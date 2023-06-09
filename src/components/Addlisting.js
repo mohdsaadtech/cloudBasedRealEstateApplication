@@ -16,21 +16,44 @@ function Addlisting() {
 
   const [successMessage, setSuccessMessage] = useState("");
   const [failureMessage, setFailureMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
   let handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true);
     setSuccessMessage("");
     setFailureMessage("");
-    console.log("addlisting", title);
-    console.log("addlisting", address);
-    console.log("addlisting", description);
-    console.log("addlisting", area_name);
-    console.log("addlisting", rent);
-    console.log("addlisting", area);
-    console.log("addlisting", type);
-    console.log("addlisting", bedroom_count);
-    console.log("addlisting", bathroom_count);
-    console.log("addlisting", user_id);
-    console.log("addlisting", imageUrl);
+
+    if (
+      !title ||
+      !address ||
+      !description ||
+      !area_name ||
+      !rent ||
+      !area ||
+      !type ||
+      !bedroom_count ||
+      !bathroom_count ||
+      !user_id ||
+      !imageUrl
+    ) {
+      setFailureMessage("*Please fill in all the required fields.");
+      return;
+    }
+
+    //   setSuccessMessage("");
+    //   setFailureMessage("");
+    //   console.log("addlisting", title);
+    //   console.log("addlisting", address);
+    //   console.log("addlisting", description);
+    //   console.log("addlisting", area_name);
+    //   console.log("addlisting", rent);
+    //   console.log("addlisting", area);
+    //   console.log("addlisting", type);
+    //   console.log("addlisting", bedroom_count);
+    //   console.log("addlisting", bathroom_count);
+    //   console.log("addlisting", user_id);
+    //   console.log("addlisting", imageUrl);
     try {
       const formData = new FormData();
       formData.append("title", title);
@@ -62,8 +85,10 @@ function Addlisting() {
         setBathroom_count("");
         setDescription("");
         setUser_id("");
+        setImageUrl("");
         //setUser_id("64724d60aed0dca72ee0347d ");
         setSuccessMessage("Listing created successfully");
+        setSubmitted(false);
       } else {
         setFailureMessage(resultJson.message);
       }
@@ -101,12 +126,15 @@ function Addlisting() {
           <div className="flex flex-col mb-4">
             <label className="font-semibold">Title</label>
             <input
-              className="border relative bg-gray-100 p-2"
+              className="border relative bg-white-100 p-2"
               type="text"
               value={title}
               placeholder="Title"
               onChange={(e) => setTitle(e.target.value)}
             />
+            {submitted && !title && (
+              <p className="text-red-800">*Please enter a Title.</p>
+            )}
           </div>
           <div className="flex flex-col mb-4">
             <label className="font-semibold">Address</label>
@@ -117,6 +145,9 @@ function Addlisting() {
               placeholder="Address"
               onChange={(e) => setAddress(e.target.value)}
             />
+            {submitted && !address && (
+              <p className="text-red-800">*Please enter a Address.</p>
+            )}
           </div>
           <div className="flex flex-col mb-4">
             <label className="font-semibold">Area Name</label>
@@ -127,6 +158,9 @@ function Addlisting() {
               placeholder="Area Name"
               onChange={(e) => setArea_name(e.target.value)}
             />
+            {submitted && !area_name && (
+              <p className="text-red-800">*Please enter a Area Name.</p>
+            )}
           </div>
           <div className="grid w-1/5 mr-1">
             <label className="font-semibold">Rent</label>
@@ -138,6 +172,9 @@ function Addlisting() {
               placeholder="Rent ₹"
               onChange={(e) => setRent(e.target.value)}
             />
+            {submitted && !rent && (
+              <p className="text-red-800">*Please enter a Rent Amount.</p>
+            )}
           </div>
           <div className="grid w-1/5 mr-1">
             <label className="font-semibold">Area</label>
@@ -149,6 +186,9 @@ function Addlisting() {
               placeholder="Area in sqft"
               onChange={(e) => setArea(e.target.value)}
             />
+            {submitted && !area && (
+              <p className="text-red-800">*Please enter a Area.</p>
+            )}
           </div>
           <div className="container">
             <label className="font-semibold">
@@ -169,6 +209,9 @@ function Addlisting() {
               />
               <span>Apartment</span>
             </label>
+            {submitted && !type && (
+              <p className="text-red-800">*Please select a Type.</p>
+            )}
           </div>
           <div className="grid w-1/5 mr-1">
             <label className="font-semibold">Bedrooms</label>
@@ -179,6 +222,9 @@ function Addlisting() {
               placeholder="Bedrooms"
               onChange={(e) => setBedroom_count(e.target.value)}
             />
+            {submitted && !bedroom_count && (
+              <p className="text-red-800">*Please enter a no of Bedroom.</p>
+            )}
           </div>
           <div className="grid w-1/5 mr-1">
             <label className="font-semibold">Bathrooms</label>
@@ -189,6 +235,9 @@ function Addlisting() {
               placeholder="Bathrooms"
               onChange={(e) => setBathroom_count(e.target.value)}
             />
+            {submitted && !bathroom_count && (
+              <p className="text-red-800">*Please enter a no of Bathroom.</p>
+            )}
           </div>
           <div className="flex flex-col mb-4">
             <label className="font-semibold">Description</label>
@@ -196,8 +245,12 @@ function Addlisting() {
               className="border border-gray-300 focus:border-violet-700 rounded w-full p-4 h-36 text-sm text-gray-400 outline-none resize-none"
               type="text"
               placeholder="Description"
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            {submitted && !description && (
+              <p className="text-red-800">*Please add a Description.</p>
+            )}
           </div>
           <div className="grid mr-1">
             <label className="font-semibold image-upload">
@@ -210,6 +263,9 @@ function Addlisting() {
               name="image_url"
               onChange={(e) => setImageUrl(e.target.files[0])}
             />
+            {submitted && !imageUrl && (
+              <p className="text-red-800">*Please add a Image.</p>
+            )}
           </div>
           <button
             type="submit"
