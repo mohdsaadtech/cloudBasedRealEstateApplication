@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-primary bg-gray-200 ;
+    @apply font-primary bg-gray-200;
   }
   .dropdown {
     @apply w-full lg:max-w-[296px] cursor-pointer;
@@ -19,10 +19,22 @@
     @apply text-2xl text-violet-700 ml-auto;
   }
   .dropdown-menu {
-    @apply px-6 py-8 text-[15px] space-y-6 shadow-md bg-white absolute w-full z-10 list-none ;
+    @apply px-6 py-8 text-[15px] space-y-6 shadow-md bg-white absolute w-full z-10 list-none;
   }
 }
 
 .image-upload {
   width: 200px;
+}
+.login-width {
+  width: 90px !important;
+  float: right;
+  margin-top: 25px;
+}
+.logout-parent {
+  width: 600px !important;
+}
+
+.first-a {
+  margin-left: 573px !important;
 }

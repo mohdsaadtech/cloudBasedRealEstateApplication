@@ -2,10 +2,12 @@ import React from "react";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import App from "../App";
 import Image from "../assets/img/cool-bg.jpg";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useContext } from "react";
 import { Link, Redirect, useNavigate, Navigate } from "react-router-dom";
+import MyContext from "../components/MyContext";
 
 const Login = ({ login }) => {
+  const { username, updateUsernameState } = useContext(MyContext);
   const [errorMessage, setErrorMessage] = useState("");
   const history = useNavigate();
 
