@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLayoutEffect, useEffect } from "react";
+import { Link, Redirect, useNavigate, Navigate, json } from "react-router-dom";
 
 function Addlisting() {
+  const history = useNavigate();
+  const [username, setUsername] = useState("");
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
@@ -17,6 +21,43 @@ function Addlisting() {
   const [successMessage, setSuccessMessage] = useState("");
   const [failureMessage, setFailureMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  async function logout() {
+    localStorage.removeItem("token");
+    await history("/login");
+  }
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:5000/isUserAuthenticated", {
+        headers: {
+          "x-access-token": JSON.parse(localStorage.getItem("token")).token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) =>
+          data.isLoggedIn ? setUsername(data.email) : navigate("/login")
+        )
+        .catch((err) => alert(err));
+    } else if (token === null) {
+      setUsername(null);
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  // useLayoutEffect(() => {
+  //   //console.log(JSON.parse(localStorage.getItem("token")));
+  //   console.log(localStorage.getItem("token"));
+  //   fetch("http://localhost:5000/isUserAuthenticated", {
+  //     headers: {
+  //       "x-access-token": JSON.parse(localStorage.getItem("token")).token,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => (data.isLoggedIn ? setUsername(data.email) : null))
+  //     .catch((err) => alert(err));
+  // }, []);
 
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,6 +163,23 @@ function Addlisting() {
           <h2 className="text-4xl font-bold text-center py-8">
             <span className="text-violet-800 font-semibold">Add</span>listings.
           </h2>
+          {username ? (
+            <div className="text-3xl flex flex-col">
+              <h2 className="text-2xl font-bold text-center py-8">
+                <span className="text-violet-800 font-semibold">
+                  Hello, {username} you are logged in
+                </span>
+              </h2>
+              <div
+                className="cursor-pointer mx-3 hover:text-green-300"
+                onClick={logout}
+              >
+                Logout
+              </div>
+            </div>
+          ) : (
+            <p></p>
+          )}
 
           <div className="flex flex-col mb-4">
             <label className="font-semibold">Title</label>
