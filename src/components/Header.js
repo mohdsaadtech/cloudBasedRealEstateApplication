@@ -77,9 +77,9 @@ const Header = () => {
         <div className="flex items-center gap-6 ">
           <Link to="About"></Link>
           <Link to="Contact"></Link>
-          <Link to="Dashboard">
+          {/* <Link to="Dashboard">
             <RxDashboard size={30} className="cursor-pointer" />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>
